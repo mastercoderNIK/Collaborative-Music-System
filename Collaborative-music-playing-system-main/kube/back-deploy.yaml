@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-deploy
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      name: back-pod
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: back-pod 
+          image: dockerayush039/sepmback
+          envFrom:
+            - secretRef:
+                name: sepm-back-secrets
